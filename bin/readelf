@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$1" == "-s" -a "$2" != "" ] ; then
+    nm -P -t d "$2" | awk '{print $1":", $4, $3, $2}'
+    exit $?
+fi
+
+exit 1

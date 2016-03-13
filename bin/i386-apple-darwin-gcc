@@ -1,0 +1,10 @@
+#!/bin/sh
+
+export DEVELOPER=${DEVELOPER=`xcode-select --print-path`}
+export PLATFORM="iPhoneSimulator"
+export IPHONE_SDK=${IPHONE_SDK=`xcodebuild -showsdks 2>/dev/null | fgrep -- '-sdk iphoneos' | tail -1 | sed 's/^.*-sdk iphoneos//'`}
+export IPHONE_MIN_VERSION=${IPHONE_MIN_VERSION=${IPHONE_SDK%.*}.0}
+export DEVROOT="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
+export SDKROOT="${DEVROOT}/SDKs/${PLATFORM}${IPHONE_SDK}.sdk"
+
+exec `xcrun -find gcc` -arch i386 -isysroot ${SDKROOT} -miphoneos-version-min=${IPHONE_MIN_VERSION} -Wno-error-implicit-function-declaration $@
