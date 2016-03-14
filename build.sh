@@ -60,7 +60,7 @@ export DEVELOPER=${DEVELOPER=`xcode-select --print-path`}
 export IPHONE_SDK=${IPHONE_SDK=`xcodebuild -showsdks 2>/dev/null | fgrep -- '-sdk iphoneos' | tail -1 | sed 's/^.*-sdk iphoneos//'`}
 export IPHONE_MIN_VERSION=${IPHONE_MIN_VERSION=${IPHONE_SDK%.*}.0}
 
-for arch in armv7 armv7s arm64 i386 x86_64 ; do
+for arch in x86_64 i386 armv7 armv7s arm64 ; do
     echo "Building Perl for ${arch}..."
     ./configure --mode=cross --host-has union_semun --target=${arch}-apple-darwin --target-tools-prefix=${arch}-apple-darwin- --has=union_semun --no-dynaloader --all-static -Dccdlflags=' ' -Doptimize=-g --prefix=...
     make
@@ -71,5 +71,4 @@ done
 
 lipo -create -output ../../install/lib/libperl.a ../../install/lib/perl5/5.22.1/*/CORE/libperl.a
 
-#cp .libs/lib{jpeg,turbojpeg}.a ${LIB}/${PLATFORM}/${ARCH}
-#lipo -create -output ${LIB}/libjpeg.a ${LIB}/*/*/libjpeg.a
+exit 0
