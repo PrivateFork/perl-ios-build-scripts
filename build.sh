@@ -56,6 +56,10 @@ patch -p0 <<'EOF'
  	$(eval extlibs=$(shell cat ext.libs))
 EOF
 
+export DEVELOPER=${DEVELOPER=`xcode-select --print-path`}
+export IPHONE_SDK=${IPHONE_SDK=`xcodebuild -showsdks 2>/dev/null | fgrep -- '-sdk iphoneos' | tail -1 | sed 's/^.*-sdk iphoneos//'`}
+export IPHONE_MIN_VERSION=${IPHONE_MIN_VERSION=${IPHONE_SDK%.*}.0}
+
 for arch in armv7 armv7s arm64 i386 x86_64 ; do
     echo "Building Perl for ${arch}..."
     ./configure --mode=cross --host-has union_semun --target=arm-apple-darwin --target-tools-prefix=${arch}-apple-darwin- --has=union_semun --no-dynaloader --all-static -Dccdlflags=' ' -Doptimize=-g --prefix=/tmp
