@@ -69,7 +69,7 @@ for arch in armv7 armv7s arm64 i386 x86_64 ; do
     make clean
 done
 
-exit
+lipo -create -output ../../install/lib/libperl.a ../../install/lib/perl5/5.22.1/*/CORE/libperl.a
 
 #cp .libs/lib{jpeg,turbojpeg}.a ${LIB}/${PLATFORM}/${ARCH}
 #lipo -create -output ${LIB}/libjpeg.a ${LIB}/*/*/libjpeg.a
