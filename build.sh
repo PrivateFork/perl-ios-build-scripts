@@ -66,6 +66,9 @@ for arch in x86_64 i386 armv7 armv7s arm64 ; do
     make
     make install
     tar --exclude "*.pod" -C ... -c -f - lib | (cd ../../install && tar -x -f -)
+    mkdir -p ../../install/include
+    cp .../lib/perl5/*/*/CORE/*.h ../../install/include
+    rm -rf ...
     make clean
 done
 
