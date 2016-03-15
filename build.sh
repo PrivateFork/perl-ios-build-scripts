@@ -72,6 +72,6 @@ for arch in x86_64 i386 armv7 armv7s arm64 ; do
     make clean
 done
 
-lipo -create -output ../../install/lib/libperl.a ../../install/lib/perl5/5.22.1/*/CORE/libperl.a
+lipo -create -output ../../install/lib/libperl.a ../../install/lib/perl5/*/*/CORE/libperl.a
 
 exit 0
