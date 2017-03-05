@@ -60,7 +60,7 @@ export DEVELOPER=${DEVELOPER=`xcode-select --print-path`}
 export IPHONE_SDK=${IPHONE_SDK=`xcodebuild -showsdks 2>/dev/null | fgrep -- '-sdk iphoneos' | tail -1 | sed 's/^.*-sdk iphoneos//'`}
 export IPHONE_MIN_VERSION=${IPHONE_MIN_VERSION=${IPHONE_SDK%.*}.0}
 
-for arch in x86_64 i386 armv7 armv7s arm64 ; do
+for arch in x86_64 armv7 arm64 ; do
     echo "Building Perl for ${arch}..."
     ./configure --mode=cross --host-has union_semun --target=${arch}-apple-darwin --target-tools-prefix=${arch}-apple-darwin- --has=union_semun --no-dynaloader --all-static -Dccdlflags=' ' -Doptimize=-g --prefix=...
     make
